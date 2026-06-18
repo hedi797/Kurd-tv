@@ -1,0 +1,6 @@
+{
+  "name": "Kurd TV",
+  "description": "Stream live TV channels from Kurdistan and beyond, including news, movies, sports, education, and kids entertainment.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
