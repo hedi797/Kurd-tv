@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Amanj TV</string>
+    <string name="attribution_playback_label">Amanj TV Player Service</string>
+</resources>

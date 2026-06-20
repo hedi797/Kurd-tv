@@ -14,9 +14,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -75,15 +73,17 @@ fun HomeScreen(
                     channel.streamUrl
                 }
                 
-                VideoPlayer(
-                    videoUrl = activeUrl,
-                    channelName = channel.name,
-                    channelLogoUrl = channel.logoUrl,
-                    modifier = Modifier.fillMaxSize(),
-                    onPlaybackError = {
-                        // Automatically fall back gracefully if default live URL suffers disconnection
-                    }
-                )
+                key(channel.id) {
+                    VideoPlayer(
+                        videoUrl = activeUrl,
+                        channelName = channel.name,
+                        channelLogoUrl = channel.logoUrl,
+                        modifier = Modifier.fillMaxSize(),
+                        onPlaybackError = {
+                            // Automatically fall back gracefully if default live URL suffers disconnection
+                        }
+                    )
+                }
             } ?: Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
@@ -189,6 +189,36 @@ fun HomeScreen(
                 }
             }
         }
+
+        // 2.5 SEARCH/FILTER CHANNEL BAR
+        val searchQuery by viewModel.searchQuery.collectAsState()
+        OutlinedTextField(
+            value = searchQuery,
+            onValueChange = { viewModel.searchQuery.value = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 6.dp)
+                .testTag("home_channel_search"),
+            placeholder = { Text("بگەڕێ بەدوای چەناڵدا... | Search...", color = Color.Gray, fontSize = 14.sp) },
+            leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "گەڕان / Search", tint = Color.LightGray) },
+            trailingIcon = {
+                if (searchQuery.isNotEmpty()) {
+                    IconButton(onClick = { viewModel.searchQuery.value = "" }) {
+                        Icon(imageVector = Icons.Default.Clear, contentDescription = "پاککردنەوە / Clear", tint = Color.LightGray)
+                    }
+                }
+            },
+            singleLine = true,
+            shape = RoundedCornerShape(12.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+                focusedContainerColor = MaterialTheme.colorScheme.surface,
+                unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                focusedTextColor = Color.White,
+                unfocusedTextColor = Color.White
+            )
+        )
 
         // 3. HORIZONTAL CATEGORY Badges
         LazyRow(

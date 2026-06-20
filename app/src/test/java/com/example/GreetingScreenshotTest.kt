@@ -11,7 +11,7 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.ui.theme.MyApplicationTheme
+import com.example.KurdTVTheme
 import com.github.takahirom.roborazzi.RobolectricDeviceQualifiers
 import com.github.takahirom.roborazzi.captureRoboImage
 import org.junit.Rule
@@ -31,7 +31,7 @@ class GreetingScreenshotTest {
   @Test
   fun greeting_screenshot() {
     composeTestRule.setContent {
-      MyApplicationTheme {
+      KurdTVTheme(darkTheme = true) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -41,7 +41,7 @@ class GreetingScreenshotTest {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = "ئامانج تیڤی",
-                    color = Color(0xFFFFB300),
+                    color = Color.White,
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold
                 )

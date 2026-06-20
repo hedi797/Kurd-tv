@@ -60,7 +60,7 @@ fun MainContainer(
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 androidx.compose.foundation.Image(
-                    painter = androidx.compose.ui.res.painterResource(id = com.example.R.drawable.img_kurd_tv_logo_1781707401041),
+                    painter = androidx.compose.ui.res.painterResource(id = com.example.R.drawable.img_white_tv_logo_1781780211114),
                     contentDescription = "Logo",
                     modifier = Modifier
                         .size(120.dp)
