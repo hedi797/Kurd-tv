@@ -18,12 +18,13 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup clean Gradle
+      - name: Setup clean Gradle (No Cache)
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '8.7'
+          cache-disabled: true
 
-      - name: Build Debug APK (Bypassing Wrapper)
+      - name: Build Debug APK
         run: gradle assembleDebug --stacktrace
 
       - name: Upload APK
